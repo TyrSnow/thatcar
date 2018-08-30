@@ -1,0 +1,30 @@
+<!--pages/index/index.wxml-->
+<view class="page p-index">
+  <view class="bar"></view>
+  <view class="quick">
+    <view class="formItem">
+      <text class="label">时长</text>
+      <picker
+        value="{{time}}"
+        range="{{timeRange}}"
+        bindchange="handleTimeRangeChange"
+      >
+        {{timeRange[time]}}
+      </picker>
+    </view>
+    <view class="formItem">
+      <text class="label">车牌号</text>
+      <input class="input" placeholder='车牌号' />
+    </view>
+    <view class="formItem">
+      <text class="label">APP</text>
+      <picker
+        range="{{appList}}"
+        value="{{app}}"
+      >{{appList[app]}}</picker>
+    </view>
+    <view class="formItem formItem_control">
+      <button class="btn btn-primary">Start</button>
+    </view>
+  </view>
+</view>

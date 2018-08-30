@@ -1,0 +1,22 @@
+<!--pages/config/config.wxml-->
+<view class="page p-config">
+  <view class="title">密码修改</view>
+  <button class="btn btn_primary" bindtap='showPassword'>修改安全密码</button>
+  <button class="btn btn_primary" bindtap='showPassword'>修改风险密码</button>
+  <view class="title">紧急联系人</view>
+  <view class="contact">
+    <text class="phone">15812345678</text>
+    <text class="status">验证通过</text>
+  </view>
+  <view class="contact">
+    <text class="phone">15812345678</text>
+    <text class="status">验证</text>
+  </view>
+  <button class="btn btn_primary">新增紧急联系人</button>
+  <text class="title">我的</text>
+  <password
+    wx:if="{{passwordVisible}}"
+    title="{{passwordTitle}}"
+    bindchange="handlePassword"
+  />
+</view>

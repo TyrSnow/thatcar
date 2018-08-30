@@ -1,0 +1,7 @@
+{
+  "pages": [
+    "pages/config/config",
+    "pages/index/index",
+    "pages/fake/fake"
+  ]
+}

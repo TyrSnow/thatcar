@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "修改配置",
+  "usingComponents": {
+    "password": "../../components/password/password"
+  }
+}
