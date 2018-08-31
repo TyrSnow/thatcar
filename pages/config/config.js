@@ -6,6 +6,19 @@ Page({
    */
   data: {
     passwordVisible: false,
+    passwordTitle: '请输入新密码',
+    phone: '',
+    contacts: [
+      {
+        id: '0',
+        phone: '15812345678',
+        authed: true,
+      }, {
+        id: '1',
+        phone: '15812345679',
+        authed: false,
+      }
+    ],
   },
   showPassword() {
     this.setData({
@@ -40,6 +53,45 @@ Page({
       });
     }
     console.debug('typed password is: ', password);
+  },
+  cancelPassword() {
+    this.setData({
+      passwordVisible: false,
+    });
+  },
+  handleRemoveContact(e) {
+    let { id } = e.currentTarget.dataset;
+    wx.showToast({
+      title: `Will remove contact ${id}`,
+      icon: 'none',
+    });
+  },
+  handlePhoneChange(e) {
+    this.setData({
+      phone: e.detail.value,
+    });
+  },
+  handlePhoneBlur() {
+    this.setData({
+      phone: '',
+    });
+  },
+  addContact() {
+    wx.showToast({
+      title: `Will send an message to ${this.data.phone}`,
+      icon: 'none',
+    });
+    const { contacts } = this.data;
+    contacts.push({
+      id: new Date().valueOf(),
+      phone: this.data.phone,
+      authed: false,
+    });
+  
+    this.setData({
+      phone: '',
+      contacts,
+    });
   },
   /**
    * 生命周期函数--监听页面加载

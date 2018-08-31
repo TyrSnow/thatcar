@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "修改配置",
+  "navigationBarBackgroundColor": "#3d3c51",
   "usingComponents": {
     "password": "../../components/password/password"
   }

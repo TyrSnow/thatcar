@@ -1,4 +1,7 @@
 // components/password/password.js
+function generateRandomNumList() {
+  return ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].sort(cube => (Math.random() - 0.5)).concat('X');
+}
 Component({
   /**
    * 组件的属性列表
@@ -10,7 +13,7 @@ Component({
         this.setData({
           password: ['', '', '', '', '', ''],
           cur: -1,
-          nums: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'X'],
+          nums: generateRandomNumList(),
         });
       },
     },
@@ -22,7 +25,7 @@ Component({
   data: {
     password: ['', '', '', '', '', ''],
     cur: -1,
-    nums: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'X'],
+    nums: [],
   },
 
   /**
@@ -54,6 +57,9 @@ Component({
           value: password.join(''),
         });
       }
+    },
+    handleCancel(e) {
+      this.triggerEvent('cancel', {});
     }
   }
 });

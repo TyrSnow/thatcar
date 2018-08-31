@@ -1,22 +1,66 @@
 <!--pages/config/config.wxml-->
+<image class="bg" src="/res/images/bg.jpg"></image>
 <view class="page p-config">
-  <view class="title">密码修改</view>
-  <button class="btn btn_primary" bindtap='showPassword'>修改安全密码</button>
-  <button class="btn btn_primary" bindtap='showPassword'>修改风险密码</button>
-  <view class="title">紧急联系人</view>
-  <view class="contact">
-    <text class="phone">15812345678</text>
-    <text class="status">验证通过</text>
+  <view class="group">
+    <view class="title">密码修改</view>
+    <view class="line" bindtap='showPassword'>
+      <text class="iconfont icon-safe"></text>
+      <text class="text">修改安全密码</text>
+    </view>
+    <view class="line" bindtap='showPassword'>
+      <text class="iconfont icon-risk"></text>
+      <text class="text">修改风险密码</text>
+    </view>
   </view>
-  <view class="contact">
-    <text class="phone">15812345678</text>
-    <text class="status">验证</text>
+  <view class="group">
+    <view class="title">紧急联系人(2/5)</view>
+    <view
+      class="line contact"
+      wx:for="{{contacts}}"
+      wx:key="{{item.id}}"
+    >
+      <text wx:if="{{item.authed}}" class="iconfont icon-ok status"></text>
+      <text wx:else="{{item.authed}}" class="iconfont icon-wait status"></text>
+      <text class="phone">{{item.phone}}</text>
+      <text bindtap="handleRemoveContact" data-id="{{item.id}}" class="iconfont icon-remove"></text>
+    </view>
+    <view wx:if="{{contacts.length < 5}}" class="line contact edit">
+      <text class="iconfont icon-addContact"></text>
+      <input
+        class="phone"
+        value="{{phone}}"
+        placeholder='添加紧急联系人'
+        type="text"
+        confirm-type="done"
+        bindinput="handlePhoneChange"
+      />
+      <text
+        class="iconfont icon-cancel"
+        wx:if="{{phone.length > 0}}"
+        bindtap="handlePhoneBlur"
+      ></text>
+      <text
+        class="iconfont icon-ok"
+        wx:if="{{phone.length > 0}}"
+        bindtap="addContact"
+      ></text>
+    </view>
   </view>
-  <button class="btn btn_primary">新增紧急联系人</button>
-  <text class="title">我的</text>
+  <view class="group">
+    <text class="title">我的</text>
+    <view class="line">
+      <text class="iconfont icon-edit"></text>
+      <text class="name">-您的称呼-</text>
+    </view>
+    <!-- <view class="line">
+      <text class="iconfont icon-edit"></text>
+      <text class="name">-您的手机号-</text>
+    </view> -->
+  </view>
   <password
     wx:if="{{passwordVisible}}"
     title="{{passwordTitle}}"
     bindchange="handlePassword"
+    bindcancel="cancelPassword"
   />
 </view>

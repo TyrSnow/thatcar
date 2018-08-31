@@ -1,16 +1,33 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 818233 */
+  src: url('//at.alicdn.com/t/font_818233_camrgr7x33t.eot');
+  src: url('//at.alicdn.com/t/font_818233_camrgr7x33t.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_818233_camrgr7x33t.woff') format('woff'),
+  url('//at.alicdn.com/t/font_818233_camrgr7x33t.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_818233_camrgr7x33t.svg#iconfont') format('svg');
+}
 .page {
   width: 100vw;
-  height: 100vh;
-  background-color: #0F0F1B;
+  min-height: 100vh;
+  background-color: #3e4452;
+  background: linear-gradient(-45deg, rgba(55, 54, 74, 0.95) 0%, rgba(55, 54, 74, 0.95) 30%, rgba(61, 60, 81, 0.95) 30%);
   color: #FFF;
   padding: 5vw;
   box-sizing: border-box;
+}
+.bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 .btn {
   width: 100%;
 }
 .btn.btn-primary {
-  background: #0E78E6;
+  background: #23232f;
   color: #FFF;
 }
 .formTitle {
@@ -31,4 +48,43 @@
   text-align: right;
   flex-shrink: 0;
   margin-right: 5vw;
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16pt;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0 4pt;
+}
+.iconfont.icon-safe:before {
+  content: '\e625';
+}
+.iconfont.icon-risk:before {
+  content: '\e6de';
+}
+.iconfont.icon-addContact:before {
+  content: '\e614';
+}
+.iconfont.icon-ok:before {
+  content: '\e640';
+  color: #4cd964;
+}
+.iconfont.icon-wait:before {
+  content: '\e699';
+  color: #999;
+}
+.iconfont.icon-remove:before {
+  content: '\e684';
+  color: #F00;
+}
+.iconfont.icon-edit:before {
+  content: '\e60c';
+}
+.iconfont.icon-return:before {
+  content: '\e6aa';
+}
+.iconfont.icon-cancel:before {
+  content: '\e636';
 }
