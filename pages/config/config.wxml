@@ -1,5 +1,5 @@
 <!--pages/config/config.wxml-->
-<image class="bg" src="/res/images/bg.jpg"></image>
+<image class="bg" src="/res/images/dog.jpg"></image>
 <view class="page p-config">
   <view class="group">
     <view class="title">密码修改</view>
@@ -13,7 +13,7 @@
     </view>
   </view>
   <view class="group">
-    <view class="title">紧急联系人(2/5)</view>
+    <view class="title">紧急联系人({{contacts.length}}/5)</view>
     <view
       class="line contact"
       wx:for="{{contacts}}"

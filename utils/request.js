@@ -9,13 +9,23 @@ export function request(option) {
   }
   option.header.rdSessionKey = rdSessionKey;
   let originFail = option.fail;
-  option.fail = (err) => {
-    wx.showToast({
-      title: '网络请求失败！',
-    });
-    originFail && originFail(err)
-  }
-  return wx.request(option);
+  let originSuccess = option.success;
+
+  return new Promise((resolve, reject) => {
+    option.fail = (err) => {
+      wx.showToast({
+        title: '网络请求失败！',
+      });
+      reject(err);
+      originFail && originFail(err);
+    }
+    option.success = (resp) => {
+      originSuccess && originSuccess(resp);
+      resolve(resp);
+    }
+    return wx.request(option);
+  });
+  
 }
 
 export function setSessionKey(key) {

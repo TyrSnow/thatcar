@@ -1,5 +1,9 @@
 import { request, setSessionKey, getSessionKey } from './request.js';
-import { getOpenIdUrl } from './config.js';
+import {
+  getOpenIdUrl,
+  changeUnlockUrl,
+  loadContactsUrl,
+} from './config.js';
 
 export function checkSession(callback) {
   if (!getSessionKey()) { // 本地没有rdSessionKey的时候也要重新去拿
@@ -34,4 +38,20 @@ export function getLogin(callback) {
       }
     }
   })
+}
+
+export function changeUnlockPassword(unlockPwd) {
+  return request({
+    url: changeUnlockUrl,
+    data: {
+      unlockPwd,
+    },
+  });
+}
+
+export function loadContacts() {
+  return request({
+    url: loadContactsUrl,
+    method: 'get',
+  });
 }

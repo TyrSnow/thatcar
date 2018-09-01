@@ -1,4 +1,5 @@
 <!--pages/index/index.wxml-->
+<image class="bg" src="/res/images/cat.jpg"></image>
 <view class="page p-index">
   <view class="bar"></view>
   <view class="quick">
