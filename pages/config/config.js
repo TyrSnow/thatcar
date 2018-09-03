@@ -1,5 +1,14 @@
 // pages/config/config.js
-import { loadContacts } from '../../utils/method.js';
+import {
+  loadContacts,
+  saveContact,
+  deleteContact,
+  modifyRiskPassword,
+  modifyUnlockPassword,
+} from '../../utils/method.js';
+
+const MODIFY_RISK_PASSWORD = 0;
+const MODIFY_UNLOCK_PASSWORD = 1;
 
 Page({
 
@@ -22,17 +31,26 @@ Page({
       }
     ],
   },
-  showPassword() {
+  modifyRiskPassword() {
     this.setData({
+      type: MODIFY_RISK_PASSWORD,
       passwordVisible: true,
-      passwordTitle: '请输入新密码',
+      passwordTitle: '请输入新风险密码',
+      lastPassword: '',
+    });
+  },
+  modifyUnlockPassword() {
+    this.setData({
+      type: MODIFY_UNLOCK_PASSWORD,
+      passwordVisible: true,
+      passwordTitle: '请输入新解锁密码',
       lastPassword: '',
     });
   },
   handlePassword(password) {
     if (this.data.lastPassword === '') {
       this.setData({
-        passwordTitle: '请再次输入新密码',
+        passwordTitle: this.data.type === MODIFY_RISK_PASSWORD ? '请再次输入新风险密码' : '请再次输入新解锁密码',
         lastPassword: password.detail.value,
       });
     } else {
@@ -43,12 +61,23 @@ Page({
         });
       } else {
         wx.showLoading();
-        setTimeout(function () {
-          wx.hideLoading();
-          wx.showToast({
-            title: '密码修改成功！',
+        if (this.data.type === MODIFY_RISK_PASSWORD) {
+          modifyRiskPassword(this.data.lastPassword).then(resp => {
+            wx.hideLoading();
+            wx.showToast({
+              title: '修改成功',
+            });
+          }).catch(err => {
           });
-        }, 2000);
+        } else {
+          modifyUnlockPassword(this.data.lastPassword).then(resp => {
+            wx.hideLoading();
+            wx.showToast({
+              title: '修改成功',
+            });
+          }).catch(err => {
+          });
+        }
       }
       this.setData({
         passwordVisible: false,
@@ -63,10 +92,12 @@ Page({
   },
   handleRemoveContact(e) {
     let { id } = e.currentTarget.dataset;
-    wx.showToast({
-      title: `Will remove contact ${id}`,
-      icon: 'none',
-    });
+    deleteContact(id).then(resp => {
+      wx.showToast({
+        title: '紧急联系人已删除',
+      });
+      this.refreshContacts();
+    }).catch(err => {});
   },
   handlePhoneChange(e) {
     this.setData({
@@ -79,21 +110,31 @@ Page({
     });
   },
   addContact() {
-    wx.showToast({
-      title: `Will send an message to ${this.data.phone}`,
-      icon: 'none',
-    });
-    const { contacts } = this.data;
-    contacts.push({
-      id: new Date().valueOf(),
-      phone: this.data.phone,
-      authed: false,
-    });
+    let existPhone = this.data.contacts.filter(contact => contact.phone === this.data.phone);
+    if (existPhone.length > 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '紧急联系人已经存在',
+      });
+    } else {
+      saveContact(this.data.phone).then(resp => {
+        wx.showToast({
+          title: '紧急联系人已添加',
+        });
+        this.refreshContacts();
+      });
+    }
   
     this.setData({
       phone: '',
-      contacts,
     });
+  },
+  refreshContacts() {
+    loadContacts().then((resp) => {
+      this.setData({
+        contacts: resp.data.data,
+      });
+    }).catch((err) => {});
   },
   /**
    * 生命周期函数--监听页面加载
@@ -113,13 +154,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    loadContacts().then((resp) => {
-      this.setData({
-        contacts: resp.data.data,
-      });
-    }).catch((err) => {
-
-    });
+    this.refreshContacts();
   },
 
   /**

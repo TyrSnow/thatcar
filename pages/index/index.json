@@ -1,3 +1,7 @@
 {
-  "navigationBarTitleText": "My Watch Begins"
+  "navigationBarTitleText": "That Car",
+  "navigationBarBackgroundColor": "#3d3c51",
+  "usingComponents": {
+    "password": "../../components/password/password"
+  }
 }

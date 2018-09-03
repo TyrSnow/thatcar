@@ -1,16 +1,28 @@
 // pages/index/index.js
+import {
+  getCurrentTrip,
+  startTrip,
+} from '../../utils/method.js';
+
+const TIME_RANG_MINITES = [
+  15, 30, 45, 60,
+  75, 90, 105, 120,
+];
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    time: '00:30',
-    app: 0,
-    appList: ['出租', '专车'],
+    loading: true,
+    onTrip: false,
+    // time: '00:30',
+    app: [0],
+    plateNo: '',
+    appList: ['出租', '滴滴打车', '其他'],
     timeRange: [
       '0:15', '0:30', '0:45', '1:00',
       '1:15', '1:30', '1:45', '2:00',
-      '2:15', '2:30', '2:45', '3:00',
     ],
     time: [0],
   },
@@ -21,11 +33,55 @@ Page({
     });
   },
 
+  handleAppChange(ev) {
+    this.setData({
+      app: ev.detail.value,
+    });
+  },
+
+  handlePlateNoChange(ev) {
+    this.setData({
+      plateNo: ev.detail.value,
+    });
+  },
+
+  jumpSetting() {
+    wx.navigateTo({
+      url: '../config/config',
+    });
+  },
+
+  refreshTripStatus() {
+    this.setData({
+      loading: true,
+    });
+    getCurrentTrip().then(resp => {
+      this.setData({
+        loading: false,
+        onTrip: !!resp.data.data,
+        tripData: resp.data.data,
+      });
+    }).catch(err => { });
+  },
+
+  startTrip() {
+    const { app, time, plateNo, appList } = this.data;
+    let estimateDate = TIME_RANG_MINITES[time[0]];
+    // console.log(estimateDate, plateNo, appList[app]);
+    startTrip(estimateDate, plateNo, appList[app]).then(resp => {
+      console.debug('start trip: ', resp);
+      this.refreshTripStatus();
+    }).catch(err => {
+      console.debug('start trip error: ', err);
+      this.refreshTripStatus();
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**
@@ -39,7 +95,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.refreshTripStatus();
   },
 
   /**

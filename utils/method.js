@@ -2,7 +2,13 @@ import { request, setSessionKey, getSessionKey } from './request.js';
 import {
   getOpenIdUrl,
   changeUnlockUrl,
+  saveContactUrl,
   loadContactsUrl,
+  deleteContactUrl,
+  changeUnlockPwdUrl,
+  changeRiskPwdUrl,
+  saveTripUrl,
+  getCurrentTripUrl,
 } from './config.js';
 
 export function checkSession(callback) {
@@ -49,9 +55,72 @@ export function changeUnlockPassword(unlockPwd) {
   });
 }
 
+export function saveContact(phone) {
+  return request({
+    url: saveContactUrl,
+    method: 'post',
+    data: {
+      data: JSON.stringify([{
+        phone,
+      }]),
+    }
+  });
+}
+
 export function loadContacts() {
   return request({
     url: loadContactsUrl,
     method: 'get',
   });
 }
+
+export function deleteContact(id) {
+  return request({
+    url: deleteContactUrl,
+    method: 'post',
+    data: {
+      id,
+    },
+  });
+}
+
+export function modifyRiskPassword(riskPwd) {
+  return request({
+    url: changeRiskPwdUrl,
+    method: 'post',
+    data: {
+      riskPwd,
+    },
+  });
+}
+
+export function modifyUnlockPassword(unlockPwd) {
+  return request({
+    url: changeUnlockPwdUrl,
+    method: 'post',
+    data: {
+      unlockPwd,
+    },
+  });
+}
+
+export function startTrip(estimateDate, plateNo, taxiApp) {
+  return request({
+    url: saveTripUrl,
+    method: 'post',
+    data: {
+      estimateDate,
+      plateNo,
+      taxiApp,
+    },
+  });
+}
+
+export function getCurrentTrip() {
+  return request({
+    url: getCurrentTripUrl,
+    method: 'get',
+  });
+}
+
+

@@ -1,4 +1,35 @@
 /* pages/index/index.wxss */
+.p-loading {
+  text-align: center;
+}
+.p-loading .loading {
+  animation: loading 2000ms infinite; 
+}
+.p-loading .icon-loading {
+  font-size: 30pt;
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .bar {
-  position: fixed;
+  width: 100%;
+  padding: 2vw 5vw;
+  box-sizing: border-box;
+  /* position: fixed;
+  left: 0; */
+  text-align: right;
+}
+.m-trip {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.m-trip .btn {
+  margin: 10pt 0;
 }

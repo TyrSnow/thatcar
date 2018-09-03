@@ -8,6 +8,7 @@ export function request(option) {
     option.header = {};
   }
   option.header.rdSessionKey = rdSessionKey;
+  option.header['content-type'] || (option.header['content-type'] = 'application/x-www-form-urlencoded');
   let originFail = option.fail;
   let originSuccess = option.success;
 

@@ -3,11 +3,11 @@
 <view class="page p-config">
   <view class="group">
     <view class="title">密码修改</view>
-    <view class="line" bindtap='showPassword'>
+    <view class="line" bindtap='modifyUnlockPassword'>
       <text class="iconfont icon-safe"></text>
-      <text class="text">修改安全密码</text>
+      <text class="text">修改解锁密码</text>
     </view>
-    <view class="line" bindtap='showPassword'>
+    <view class="line" bindtap='modifyRiskPassword'>
       <text class="iconfont icon-risk"></text>
       <text class="text">修改风险密码</text>
     </view>

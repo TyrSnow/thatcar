@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 818233 */
-  src: url('//at.alicdn.com/t/font_818233_camrgr7x33t.eot');
-  src: url('//at.alicdn.com/t/font_818233_camrgr7x33t.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_818233_camrgr7x33t.woff') format('woff'),
-  url('//at.alicdn.com/t/font_818233_camrgr7x33t.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_818233_camrgr7x33t.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_818233_cfwbtv847y4.eot');
+  src: url('//at.alicdn.com/t/font_818233_cfwbtv847y4.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_818233_cfwbtv847y4.woff') format('woff'),
+  url('//at.alicdn.com/t/font_818233_cfwbtv847y4.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_818233_cfwbtv847y4.svg#iconfont') format('svg');
 }
 .page {
   width: 100vw;
@@ -88,3 +88,8 @@
 .iconfont.icon-cancel:before {
   content: '\e636';
 }
+.iconfont.icon-setting:before {
+  content: '\e676';
+}
+.icon-loading:before { content: "\e6a6"; }
+.icon-block:before { content: "\e8b2"; }

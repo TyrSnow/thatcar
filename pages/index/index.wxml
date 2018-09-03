@@ -1,8 +1,31 @@
 <!--pages/index/index.wxml-->
 <image class="bg" src="/res/images/cat.jpg"></image>
-<view class="page p-index">
-  <view class="bar"></view>
-  <view class="quick">
+<view wx:if="{{loading}}" class="page p-loading">
+  <view class="loading">
+    <text class="iconfont icon-loading"></text>
+  </view>
+</view>
+<view wx:else class="page p-index">
+  <view wx:if="{{onTrip}}" class="m-trip">
+    <view class="remainTime">剩余时间</view>
+    <view class="control">
+      <button
+        bindtap="endTrip"
+        class="btn btn-primary"
+      >结束行程</button>
+      <button
+        bindtap="delayTrip"
+        class="btn btn-primary"
+      >延迟行程</button>
+    </view>
+  </view>
+  <view wx:else class="quick">
+    <view class="bar">
+      <text
+        class="iconfont icon-setting"
+        bindtap="jumpSetting"
+      ></text>
+    </view>
     <view class="formItem">
       <text class="label">时长</text>
       <picker
@@ -15,17 +38,32 @@
     </view>
     <view class="formItem">
       <text class="label">车牌号</text>
-      <input class="input" placeholder='车牌号' />
+      <input
+        value="{{plateNo}}"
+        bindinput="handlePlateNoChange"
+        class="input"
+        placeholder='车牌号'
+      />
     </view>
     <view class="formItem">
       <text class="label">APP</text>
       <picker
         range="{{appList}}"
         value="{{app}}"
+        bindchange='handleAppChange'
       >{{appList[app]}}</picker>
     </view>
     <view class="formItem formItem_control">
-      <button class="btn btn-primary">Start</button>
+      <button
+        bindtap="startTrip"
+        class="btn btn-primary"
+      >Start</button>
     </view>
   </view>
+  <password
+    wx:if="{{passwordVisible}}"
+    title="{{passwordTitle}}"
+    bindchange="handlePassword"
+    bindcancel="cancelPassword"
+  />
 </view>
