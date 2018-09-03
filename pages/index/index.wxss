@@ -30,6 +30,15 @@
   flex-direction: column;
   justify-content: space-around;
 }
+.m-trip .remain {
+  text-align: center;
+}
+.m-trip .remain .tip {
+  margin-bottom: 8pt;
+}
+.m-trip .remain .time {
+  font-size: 26pt;
+}
 .m-trip .btn {
   margin: 10pt 0;
 }

@@ -7,7 +7,10 @@
 </view>
 <view wx:else class="page p-index">
   <view wx:if="{{onTrip}}" class="m-trip">
-    <view class="remainTime">剩余时间</view>
+    <view class="remain">
+      <view class="tip">{{remainTip}}</view>
+      <view class="time">{{hours}}:{{minites}}:{{seconds}}</view>
+    </view>
     <view class="control">
       <button
         bindtap="endTrip"
@@ -16,6 +19,7 @@
       <button
         bindtap="delayTrip"
         class="btn btn-primary"
+        disabled='{{overtime}}'
       >延迟行程</button>
     </view>
   </view>
@@ -63,7 +67,7 @@
   <password
     wx:if="{{passwordVisible}}"
     title="{{passwordTitle}}"
-    bindchange="handlePassword"
+    bindchange="verifyPassword"
     bindcancel="cancelPassword"
   />
 </view>

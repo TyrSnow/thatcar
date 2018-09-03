@@ -2,6 +2,9 @@
 import {
   getCurrentTrip,
   startTrip,
+  verifyPwd,
+  endTrip,
+  delayTrip,
 } from '../../utils/method.js';
 
 const TIME_RANG_MINITES = [
@@ -51,16 +54,54 @@ Page({
     });
   },
 
+  updateRemainTime() {
+    const { remainMinutes } = this.data.tripData;
+    let absRemainMinutes = Math.abs(remainMinutes);
+    const seconds = absRemainMinutes % 60;
+    let minites = Math.floor(absRemainMinutes / 60);
+    let hours = Math.floor(minites / 60);
+    minites = minites % 60;
+    this.setData({
+      seconds: seconds < 10 ? `0${seconds}` : seconds,
+      minites: minites < 10 ? `0${minites}` : minites,
+      hours,
+      overtime: remainMinutes < 0,
+      remainTip: remainMinutes > 0 ? '剩余时间' : '行程超时',
+    });
+
+  },
+
+  tick() {
+    const { tripData } = this.data;
+    tripData.remainMinutes--;
+    this.setData({
+      tripData,
+    });
+    this.updateRemainTime();
+  },
+
+  startCountDown() {
+    this.updateRemainTime();
+    if (this.countDownInterval) {
+      clearInterval(this.countDownInterval);
+    }
+    this.countDownInterval = setInterval(this.tick, 1000);
+  },
+
   refreshTripStatus() {
     this.setData({
       loading: true,
     });
     getCurrentTrip().then(resp => {
+      let onTrip = !!resp.data.data && resp.data.data.scheduleStatus === 1;
       this.setData({
         loading: false,
-        onTrip: !!resp.data.data,
+        onTrip,
         tripData: resp.data.data,
       });
+      if (onTrip) {
+        this.startCountDown();
+      }
     }).catch(err => { });
   },
 
@@ -73,6 +114,52 @@ Page({
       this.refreshTripStatus();
     }).catch(err => {
       console.debug('start trip error: ', err);
+      this.refreshTripStatus();
+    });
+  },
+
+  endTrip() {
+    this.setData({
+      isEnd: true,
+      passwordVisible: true,
+      passwordTitle: '请输入解锁密码',
+    });
+  },
+
+  delayTrip() {
+    this.setData({
+      isEnd: false,
+      passwordVisible: true,
+      passwordTitle: '请输入解锁密码',
+    });
+  },
+
+  verifyPassword(e) {
+    verifyPwd(e.detail.value).then(resp => {
+      this.setData({
+        passwordVisible: false,
+      });
+      if (resp.data.code === 200) {
+        if (this.data.isEnd) {
+          return endTrip(this.data.tripData.id);
+        }
+        return delayTrip(this.data.tripData.id, 15);
+      } else {
+        wx.showToast({
+          icon: 'none',
+          title: '密码不正确',
+        });
+      }
+    }).then(resp => {
+      if (resp.data.code === 200) {
+        this.refreshTripStatus();
+      } else {
+        wx.showToast({
+          icon: 'none',
+          title: resp.data.msg,
+        });
+      }
+    }).catch(err => {
       this.refreshTripStatus();
     });
   },

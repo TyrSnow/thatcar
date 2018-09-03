@@ -7,8 +7,11 @@ import {
   deleteContactUrl,
   changeUnlockPwdUrl,
   changeRiskPwdUrl,
+  verifyPwdUrl,
   saveTripUrl,
   getCurrentTripUrl,
+  endTripUrl,
+  delayTripUrl,
 } from './config.js';
 
 export function checkSession(callback) {
@@ -104,6 +107,16 @@ export function modifyUnlockPassword(unlockPwd) {
   });
 }
 
+export function verifyPwd(pwd) {
+  return request({
+    url: verifyPwdUrl,
+    method: 'post',
+    data: {
+      pwd,
+    },
+  });
+}
+
 export function startTrip(estimateDate, plateNo, taxiApp) {
   return request({
     url: saveTripUrl,
@@ -123,4 +136,24 @@ export function getCurrentTrip() {
   });
 }
 
+export function endTrip(id) {
+  return request({
+    url: endTripUrl,
+    method: 'post',
+    data: {
+      id,
+      scheduleStatus: 2,
+    },
+  });
+}
 
+export function delayTrip(id, estimateDate) {
+  return request({
+    url: delayTripUrl,
+    method: 'post',
+    data: {
+      id,
+      estimateDate,
+    },
+  });
+}

@@ -7,6 +7,9 @@ export const deleteContactUrl = `${baseUrl}/api/user/emer/delete.htm`;
 
 export const changeUnlockPwdUrl = `${baseUrl}/api/user/update/unlockPwd.htm`;
 export const changeRiskPwdUrl = `${baseUrl}/api/user/update/riskPwd.htm`;
+export const verifyPwdUrl = `${baseUrl}/api/user/verify/pwd.htm`;
 
 export const saveTripUrl = `${baseUrl}/api/user/saveTrip.htm`;
 export const getCurrentTripUrl = `${baseUrl}/api/user/getTrip.htm`;
+export const endTripUrl = `${baseUrl}/api/user/trip/updateStatus.htm`;
+export const delayTripUrl = `${baseUrl}/api/user/updateTrip.htm`;

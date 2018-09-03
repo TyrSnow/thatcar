@@ -50,12 +50,16 @@
     <text class="title">我的</text>
     <view class="line">
       <text class="iconfont icon-edit"></text>
+      <text class="name">-您的微信名-</text>
+    </view>
+    <view class="line">
+      <text class="iconfont icon-edit"></text>
       <text class="name">-您的称呼-</text>
     </view>
-    <!-- <view class="line">
+    <view class="line">
       <text class="iconfont icon-edit"></text>
       <text class="name">-您的手机号-</text>
-    </view> -->
+    </view>
   </view>
   <password
     wx:if="{{passwordVisible}}"
