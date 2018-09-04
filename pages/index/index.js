@@ -1,11 +1,15 @@
 // pages/index/index.js
 import {
+  saveUserInfo,
   getCurrentTrip,
   startTrip,
   verifyPwd,
   endTrip,
   delayTrip,
 } from '../../utils/method.js';
+import {
+  isPlateNo,
+} from '../../utils/utils.js';
 
 const TIME_RANG_MINITES = [
   15, 30, 45, 60,
@@ -97,7 +101,7 @@ Page({
       this.setData({
         loading: false,
         onTrip,
-        tripData: resp.data.data,
+        tripData: resp.data.data || {},
       });
       if (onTrip) {
         this.startCountDown();
@@ -106,12 +110,32 @@ Page({
   },
 
   startTrip() {
-    const { app, time, plateNo, appList } = this.data;
+    let { app, time, plateNo, appList } = this.data;
+    plateNo = plateNo.toUpperCase();
+    if (!isPlateNo(plateNo)) {
+      wx.showToast({
+        title: '请输入合法的车牌号',
+        icon: 'none',
+      });
+      return;
+    }
     let estimateDate = TIME_RANG_MINITES[time[0]];
     // console.log(estimateDate, plateNo, appList[app]);
     startTrip(estimateDate, plateNo, appList[app]).then(resp => {
       console.debug('start trip: ', resp);
-      this.refreshTripStatus();
+      if ([401, 402].indexOf(resp.data.code) !== -1) {
+        wx.showToast({
+          title: resp.data.msg,
+          icon: 'none',
+        });
+        setTimeout(function () {
+          wx.navigateTo({
+            url: '../config/config',
+          });
+        }, 1000);
+      } else {
+        this.refreshTripStatus();
+      }
     }).catch(err => {
       console.debug('start trip error: ', err);
       this.refreshTripStatus();
@@ -162,6 +186,21 @@ Page({
     }).catch(err => {
       this.refreshTripStatus();
     });
+  },
+
+  bindGetUserInfo(e) {
+    saveUserInfo(e.detail.userInfo).then(
+      (resp) => {
+        console.debug(resp);
+        this.startTrip();
+      },
+    ).catch(err => {
+      console.error(err);
+      wx.showToast({
+        icon: 'none',
+        title: err.message,
+      });
+    })
   },
 
   /**

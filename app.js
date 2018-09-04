@@ -20,7 +20,7 @@ App({
       success: (res) => {
         if (res.authSetting['scope.userLocation']) {
           //用户已经授权过
-          console.log("用户授权过，重新获取session");
+          console.log("用户授权过");
           // method.getLogin();
 
         } else {

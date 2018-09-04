@@ -1,11 +1,14 @@
 // pages/config/config.js
 import {
+  getUserInfo,
+  updateUserInfo,
   loadContacts,
   saveContact,
   deleteContact,
   modifyRiskPassword,
   modifyUnlockPassword,
 } from '../../utils/method.js';
+import { isPhone } from '../../utils/utils.js';
 
 const MODIFY_RISK_PASSWORD = 0;
 const MODIFY_UNLOCK_PASSWORD = 1;
@@ -30,6 +33,7 @@ Page({
         authed: false,
       }
     ],
+    userInfo: {},
   },
   modifyRiskPassword() {
     this.setData({
@@ -99,7 +103,7 @@ Page({
       this.refreshContacts();
     }).catch(err => {});
   },
-  handlePhoneChange(e) {
+  handleAddContactChange(e) {
     this.setData({
       phone: e.detail.value,
     });
@@ -110,6 +114,13 @@ Page({
     });
   },
   addContact() {
+    if (!isPhone(this.data.phone)) {
+      wx.showToast({
+        title: '不是合法的手机号',
+        icon: 'none',
+      });
+      return;
+    }
     let existPhone = this.data.contacts.filter(contact => contact.phone === this.data.phone);
     if (existPhone.length > 0) {
       wx.showToast({
@@ -136,6 +147,59 @@ Page({
       });
     }).catch((err) => {});
   },
+  refreshUserInfo() {
+    getUserInfo().then(resp => {
+      if (resp.data.code === 200) {
+        this.setData({
+          userInfo: resp.data.data,
+        });
+      }
+    });
+  },
+
+  handleRealNameChange(e) {
+    updateUserInfo({
+      realName: e.detail.value,
+    }).then((resp) => {
+      wx.showToast({
+        title: '修改成功',
+      });
+      this.refreshUserInfo();
+    }).catch(err => {
+      console.debug('updateUserInfo error: ', err);
+      wx.showToast({
+        icon: 'none',
+        title: err.note,
+      });
+      this.refreshUserInfo();
+    });
+  },
+
+  handlePhoneChange(e) {
+    if (!isPhone(e.detail.value)) {
+      wx.showToast({
+        title: '不是合法的手机号',
+        icon: 'none',
+      });
+      return;
+    }
+    updateUserInfo({
+      phone: e.detail.value,
+    }).then((resp) => {
+      wx.showToast({
+        title: '修改成功',
+      });
+      this.refreshUserInfo();
+    }).catch(err => {
+      console.debug('updateUserInfo error: ', err);
+      wx.showToast({
+        icon: 'none',
+        title: err.note,
+      });
+      this.refreshUserInfo();
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -155,6 +219,7 @@ Page({
    */
   onShow: function () {
     this.refreshContacts();
+    this.refreshUserInfo();
   },
 
   /**

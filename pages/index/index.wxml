@@ -59,8 +59,9 @@
     </view>
     <view class="formItem formItem_control">
       <button
-        bindtap="startTrip"
         class="btn btn-primary"
+        open-type='getUserInfo' 
+        bindgetuserinfo='bindGetUserInfo'
       >Start</button>
     </view>
   </view>

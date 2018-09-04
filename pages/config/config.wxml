@@ -32,7 +32,7 @@
         placeholder='添加紧急联系人'
         type="text"
         confirm-type="done"
-        bindinput="handlePhoneChange"
+        bindinput="handleAddContactChange"
       />
       <text
         class="iconfont icon-cancel"
@@ -48,18 +48,16 @@
   </view>
   <view class="group">
     <text class="title">我的</text>
-    <view class="line">
-      <text class="iconfont icon-edit"></text>
-      <text class="name">-您的微信名-</text>
-    </view>
-    <view class="line">
-      <text class="iconfont icon-edit"></text>
-      <text class="name">-您的称呼-</text>
-    </view>
-    <view class="line">
-      <text class="iconfont icon-edit"></text>
-      <text class="name">-您的手机号-</text>
-    </view>
+    <edit-input
+      value="{{userInfo.realName}}"
+      placeholder="-您的称呼-"
+      bindchange="handleRealNameChange"
+    />
+    <edit-input
+      value="{{userInfo.phone}}"
+      placeholder="-您的手机号-"
+      bindchange="handlePhoneChange"
+    />
   </view>
   <password
     wx:if="{{passwordVisible}}"

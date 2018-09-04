@@ -1,0 +1,19 @@
+<view class="line">
+  <text class="iconfont icon-edit"></text>
+  <input
+    class="edit"
+    value="{{text}}"
+    placeholder="{{placeholder}}"
+    bindinput="handleTypeIn"
+  />
+  <text
+    class="iconfont icon-cancel"
+    wx:if="{{dirty}}"
+    bindtap="handleReset"
+  ></text>
+  <text
+    class="iconfont icon-ok"
+    wx:if="{{dirty}}"
+    bindtap="applyChange"
+  ></text>
+</view>

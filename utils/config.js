@@ -1,5 +1,9 @@
 export const baseUrl = 'https://thatcar.whouapp.com/api';
 export const getOpenIdUrl = `${baseUrl}/api/wx/getOpenId.htm`;
+export const saveUserInfoUrl = `${baseUrl}/api/user/saveUser.htm`;
+export const getUserInfoUrl = `${baseUrl}/api/user/get.htm `;
+export const updateUserInfoUrl = `${baseUrl}/api/user/update/info.htm`;
+
 export const changeUnlockUrl = `${baseUrl}/api/user/update/unlockPwd.htm`;
 export const saveContactUrl = `${baseUrl}/api/user/emer/save.htm`;
 export const loadContactsUrl = `${baseUrl}/api/user/emer/get.htm`;

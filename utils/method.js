@@ -1,6 +1,9 @@
 import { request, setSessionKey, getSessionKey } from './request.js';
 import {
   getOpenIdUrl,
+  saveUserInfoUrl,
+  getUserInfoUrl,
+  updateUserInfoUrl,
   changeUnlockUrl,
   saveContactUrl,
   loadContactsUrl,
@@ -47,6 +50,26 @@ export function getLogin(callback) {
       }
     }
   })
+}
+
+export function saveUserInfo(info) {
+  return request({
+    url: saveUserInfoUrl,
+    data: info,
+  });
+}
+
+export function getUserInfo() {
+  return request({
+    url: getUserInfoUrl,
+  });
+}
+
+export function updateUserInfo(user) {
+  return request({
+    url: updateUserInfoUrl,
+    data: user,
+  });
 }
 
 export function changeUnlockPassword(unlockPwd) {
