@@ -1,6 +1,7 @@
 // components/password/password.js
+const DELETE_TEXT = '删除';
 function generateRandomNumList() {
-  return ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].sort(cube => (Math.random() - 0.5)).concat('X');
+  return ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].sort(cube => (Math.random() - 0.5)).concat(DELETE_TEXT);
 }
 Component({
   /**
@@ -35,7 +36,7 @@ Component({
     handleKeyDown(e) {
       let { cur, password } = this.data;
       let { key } = e.currentTarget.dataset;
-      if (key === 'X') {
+      if (key === DELETE_TEXT) {
         if (cur >= 0) {
           password[cur] = '';
           cur = cur - 1;
