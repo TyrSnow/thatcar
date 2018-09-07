@@ -11,15 +11,16 @@
 }
 .group .line {
   line-height: 40pt;
-  font-size: 10pt;
+  font-size: 12pt;
 }
 .group .line .iconfont {
   color: #ffb831;
   padding-left: 0;
-  font-size: 12pt;
+  font-size: 14pt;
 }
 .group .line .iconfont.icon-cancel {
   color: #777;
+  font-size: 15pt;
   margin-top: 1pt;
 }
 .group .line .text {

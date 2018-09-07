@@ -1,8 +1,9 @@
 <view class="line">
-  <text class="iconfont icon-edit"></text>
+  <text class="iconfont icon-{{icon}}"></text>
   <input
     class="edit"
     value="{{text}}"
+    type="{{type}}"
     placeholder="{{placeholder}}"
     bindinput="handleTypeIn"
   />

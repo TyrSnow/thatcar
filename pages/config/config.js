@@ -67,18 +67,32 @@ Page({
         wx.showLoading();
         if (this.data.type === MODIFY_RISK_PASSWORD) {
           modifyRiskPassword(this.data.lastPassword).then(resp => {
-            wx.hideLoading();
-            wx.showToast({
-              title: '修改成功',
-            });
+            if (resp.data.code === 200) {
+              wx.hideLoading();
+              wx.showToast({
+                title: '修改成功',
+              });
+            } else {
+              wx.showToast({
+                icon: 'none',
+                title: resp.data.msg,
+              });
+            }
           }).catch(err => {
           });
         } else {
           modifyUnlockPassword(this.data.lastPassword).then(resp => {
-            wx.hideLoading();
-            wx.showToast({
-              title: '修改成功',
-            });
+            if (resp.data.code === 200) {
+              wx.hideLoading();
+              wx.showToast({
+                title: '修改成功',
+              });
+            } else {
+              wx.showToast({
+                icon: 'none',
+                title: resp.data.msg,
+              });
+            }
           }).catch(err => {
           });
         }
@@ -97,9 +111,17 @@ Page({
   handleRemoveContact(e) {
     let { id } = e.currentTarget.dataset;
     deleteContact(id).then(resp => {
-      wx.showToast({
-        title: '紧急联系人已删除',
-      });
+      if (resp.data.code === 200) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '紧急联系人已删除',
+        });
+      } else {
+        wx.showToast({
+          icon: 'none',
+          title: resp.data.msg,
+        });
+      }
       this.refreshContacts();
     }).catch(err => {});
   },
@@ -129,9 +151,17 @@ Page({
       });
     } else {
       saveContact(this.data.phone).then(resp => {
-        wx.showToast({
-          title: '紧急联系人已添加',
-        });
+        if (resp.data.code === 200) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '紧急联系人已添加',
+          });
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: resp.data.msg,
+          });
+        }
         this.refreshContacts();
       });
     }

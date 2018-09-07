@@ -13,7 +13,9 @@ Component({
         });
       }
     },
-    placeholder: String
+    type: String,
+    placeholder: String,
+    icon: String
   },
 
   /**

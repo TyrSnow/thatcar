@@ -30,7 +30,7 @@
         class="phone"
         value="{{phone}}"
         placeholder='添加紧急联系人'
-        type="text"
+        type="number"
         confirm-type="done"
         bindinput="handleAddContactChange"
       />
@@ -52,11 +52,14 @@
       value="{{userInfo.realName}}"
       placeholder="-您的称呼-"
       bindchange="handleRealNameChange"
+      icon="user"
     />
     <edit-input
       value="{{userInfo.phone}}"
       placeholder="-您的手机号-"
+      type="number"
       bindchange="handlePhoneChange"
+      icon="mobile"
     />
   </view>
   <password

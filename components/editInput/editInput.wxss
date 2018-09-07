@@ -3,6 +3,7 @@
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding:0 4pt;
 }
 .iconfont.icon-return:before {
   content: '\e6aa';
@@ -17,9 +18,11 @@
 .iconfont.icon-cancel:before {
   content: '\e636';
 }
+.icon-user:before { content: "\e61f"; }
+.icon-mobile:before { content: "\e628"; }
 .line {
   line-height: 40pt;
-  font-size: 10pt;
+  font-size: 12pt;
   display: flex;
   justify-content: space-between;
 }
@@ -31,7 +34,7 @@
 .line .iconfont {
   color: #ffb831;
   padding-left: 0;
-  font-size: 12pt;
+  font-size: 14pt;
 }
 .line .iconfont.icon-cancel {
   color: #777;
