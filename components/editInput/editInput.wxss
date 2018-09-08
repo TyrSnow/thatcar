@@ -1,25 +1,3 @@
-.iconfont {
-  font-family:"iconfont" !important;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding:0 4pt;
-}
-.iconfont.icon-return:before {
-  content: '\e6aa';
-}
-.iconfont.icon-edit:before {
-  content: '\e60c';
-}
-.iconfont.icon-ok:before {
-  content: '\e640';
-  color: #4cd964;
-}
-.iconfont.icon-cancel:before {
-  content: '\e636';
-}
-.icon-user:before { content: "\e61f"; }
-.icon-mobile:before { content: "\e628"; }
 .line {
   line-height: 40pt;
   font-size: 12pt;
@@ -30,13 +8,12 @@
   width: 100%;
   height: 14pt;
   padding: 12pt 5pt 12pt;
+  color: #FFF;
 }
-.line .iconfont {
-  color: #ffb831;
-  padding-left: 0;
-  font-size: 14pt;
+.line .submit {
+  color: #4CAF50;
 }
-.line .iconfont.icon-cancel {
+.line .cancel {
   color: #777;
   margin-top: 1pt;
 }

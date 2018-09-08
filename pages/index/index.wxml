@@ -6,6 +6,15 @@
   </view>
 </view>
 <view wx:else class="page p-index">
+  <view class="m-info">
+    <open-data class="avatar" type="userAvatarUrl" />
+    <open-data class="name" type="userNickName" />
+    <view>
+      <iconfont type="gps2" class="gpsStatus active" />
+      <image src="../../res/images/setting.png" class="setting" bindtap="jumpSetting" />
+      <!-- <iconfont type="setting" bindtap="jumpSetting" /> -->
+    </view>
+  </view>
   <view wx:if="{{onTrip}}" class="m-trip">
     <view class="remain">
       <view class="tip">{{remainTip}}</view>
@@ -25,13 +34,9 @@
   </view>
   <view wx:else class="quick">
     <view class="bar">
-      <text
-        class="iconfont icon-setting"
-        bindtap="jumpSetting"
-      ></text>
     </view>
     <view class="formItem">
-      <text class="label">时长</text>
+      <text class="label">预估时长：</text>
       <picker
         value="{{time}}"
         range="{{timeRange}}"
@@ -41,7 +46,7 @@
       </picker>
     </view>
     <view class="formItem">
-      <text class="label">车牌号</text>
+      <text class="label">车牌号：</text>
       <input
         value="{{plateNo}}"
         bindinput="handlePlateNoChange"
@@ -50,7 +55,7 @@
       />
     </view>
     <view class="formItem">
-      <text class="label">APP</text>
+      <text class="label">打车软件：</text>
       <picker
         range="{{appList}}"
         value="{{app}}"
@@ -62,7 +67,7 @@
         class="btn btn-primary"
         open-type='getUserInfo' 
         bindgetuserinfo='bindGetUserInfo'
-      >Start</button>
+      >开始防护</button>
     </view>
   </view>
   <password

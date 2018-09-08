@@ -4,11 +4,17 @@
   <view class="group">
     <view class="title">密码修改</view>
     <view class="line" bindtap='modifyUnlockPassword'>
-      <text class="iconfont icon-safe"></text>
+      <iconfont
+        type="safe2"
+        class="iconbtn"
+      />
       <text class="text">修改解锁密码</text>
     </view>
     <view class="line" bindtap='modifyRiskPassword'>
-      <text class="iconfont icon-risk"></text>
+      <iconfont
+        type="risk"
+        class="iconbtn"
+      />
       <text class="text">修改风险密码</text>
     </view>
   </view>
@@ -19,13 +25,22 @@
       wx:for="{{contacts}}"
       wx:key="{{item.id}}"
     >
-      <text wx:if="{{item.authed}}" class="iconfont icon-ok status"></text>
-      <text wx:else="{{item.authed}}" class="iconfont icon-wait status"></text>
+      <iconfont
+        type="phone"
+      />
       <text class="phone">{{item.phone}}</text>
-      <text bindtap="handleRemoveContact" data-id="{{item.id}}" class="iconfont icon-remove"></text>
+      <iconfont
+        type="remove"
+        data-id="{{item.id}}"
+        bindtap="handleRemoveContact"
+      />
+      <text   class="iconfont icon-remove"></text>
     </view>
     <view wx:if="{{contacts.length < 5}}" class="line contact edit">
-      <text class="iconfont icon-addContact"></text>
+      <iconfont
+        type="contactor"
+        class="iconbtn"
+      />
       <input
         class="phone"
         value="{{phone}}"
@@ -52,14 +67,16 @@
       value="{{userInfo.realName}}"
       placeholder="-您的称呼-"
       bindchange="handleRealNameChange"
-      icon="user"
+      icon="ic_name"
+      class="iconbtn"
     />
     <edit-input
       value="{{userInfo.phone}}"
       placeholder="-您的手机号-"
       type="number"
       bindchange="handlePhoneChange"
-      icon="mobile"
+      icon="phone"
+      class="iconbtn"
     />
   </view>
   <password

@@ -3,6 +3,7 @@
   "navigationBarBackgroundColor": "#3d3c51",
   "usingComponents": {
     "password": "../../components/password/password",
-    "edit-input": "../../components/editInput/editInput"
+    "edit-input": "../../components/editInput/editInput",
+    "iconfont": "../../components/iconfont/iconfont"
   }
 }

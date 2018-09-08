@@ -9,8 +9,8 @@
 .page {
   width: 100vw;
   min-height: 100vh;
-  background-color: #3e4452;
-  background: linear-gradient(-45deg, rgba(55, 54, 74, 0.95) 0%, rgba(55, 54, 74, 0.95) 30%, rgba(61, 60, 81, 0.95) 30%);
+  background-color: #1C272D;
+  /* background: linear-gradient(-45deg, rgba(55, 54, 74, 0.95) 0%, rgba(55, 54, 74, 0.95) 30%, rgba(61, 60, 81, 0.95) 30%); */
   color: #FFF;
   padding: 5vw;
   box-sizing: border-box;
@@ -28,8 +28,11 @@
   width: 100%;
 }
 .btn.btn-primary {
-  background: #23232f;
+  background: #86AF25;
   color: #FFF;
+}
+.iconbtn {
+  padding: 0 5pt 0 0;
 }
 .formTitle {
   text-align: center;
@@ -45,54 +48,8 @@
   width: 100%;
 }
 .formItem .label {
-  width: 30vw;
+  width: 40vw;
   text-align: right;
   flex-shrink: 0;
   margin-right: 5vw;
 }
-
-.iconfont {
-  font-family:"iconfont" !important;
-  font-size:16pt;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 0 4pt;
-}
-.iconfont.icon-safe:before {
-  content: '\e625';
-}
-.iconfont.icon-risk:before {
-  content: '\e6de';
-}
-.iconfont.icon-addContact:before {
-  content: '\e614';
-}
-.iconfont.icon-ok:before {
-  content: '\e640';
-  color: #4cd964;
-}
-.iconfont.icon-wait:before {
-  content: '\e699';
-  color: #999;
-}
-.iconfont.icon-remove:before {
-  content: '\e684';
-  color: #F00;
-}
-.iconfont.icon-edit:before {
-  content: '\e60c';
-}
-.iconfont.icon-return:before {
-  content: '\e6aa';
-}
-.iconfont.icon-cancel:before {
-  content: '\e636';
-}
-.iconfont.icon-setting:before {
-  content: '\e676';
-}
-.icon-loading:before { content: "\e6a6"; }
-.icon-block:before { content: "\e8b2"; }
-.icon-user:before { content: "\e61f"; }
-.icon-mobile:before { content: "\e628"; }

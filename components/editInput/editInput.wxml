@@ -1,5 +1,7 @@
 <view class="line">
-  <text class="iconfont icon-{{icon}}"></text>
+  <iconfont
+    type="{{icon}}"
+  />
   <input
     class="edit"
     value="{{text}}"
@@ -7,14 +9,16 @@
     placeholder="{{placeholder}}"
     bindinput="handleTypeIn"
   />
-  <text
-    class="iconfont icon-cancel"
+  <iconfont
+    type="cancel"
+    class="cancel"
     wx:if="{{dirty}}"
     bindtap="handleReset"
-  ></text>
-  <text
-    class="iconfont icon-ok"
+  />
+  <iconfont
+    type="52"
+    class="submit"
     wx:if="{{dirty}}"
     bindtap="applyChange"
-  ></text>
+  />
 </view>
