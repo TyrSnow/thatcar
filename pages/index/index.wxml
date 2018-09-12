@@ -1,5 +1,5 @@
 <!--pages/index/index.wxml-->
-<image class="bg" src="/res/images/cat.jpg"></image>
+<!-- <image class="bg" src="/res/images/cat.jpg"></image> -->
 <view wx:if="{{loading}}" class="page p-loading">
   <view class="loading">
     <text class="iconfont icon-loading"></text>

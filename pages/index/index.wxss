@@ -85,7 +85,6 @@
 }
 .m-trip {
   width: 100%;
-  height: calc(100vh - 10vw);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -93,7 +92,6 @@
 .m-trip .remain {
   height: 100%;
   text-align: center;
-  margin-top: 20pt;
 }
 .m-trip .remain .tip {
   margin-top: 8pt;

@@ -152,6 +152,11 @@ Page({
             url: '../config/config',
           });
         }, 1000);
+      } else if (resp.data.code === 400) {
+        wx.showToast({
+          title: resp.data.msg,
+          icon: 'none',
+        });
       } else {
         this.refreshTripStatus();
       }

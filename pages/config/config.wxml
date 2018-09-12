@@ -1,5 +1,5 @@
 <!--pages/config/config.wxml-->
-<image class="bg" src="/res/images/dog.jpg"></image>
+<!-- <image class="bg" src="/res/images/dog.jpg"></image> -->
 <view class="page p-config">
   <view class="group">
     <view class="title">密码修改</view>
