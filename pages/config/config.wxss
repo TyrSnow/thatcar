@@ -8,6 +8,14 @@
 .iconbtn {
   color: #ffb831;
 }
+.iconbtn.cancel {
+  color: #666;
+}
+.iconbtn.ok {
+  color: #4CAF50;
+  position: relative;
+  top: -1pt;
+}
 .group .title {
   color: #7f7e96;
   line-height: 2.5;

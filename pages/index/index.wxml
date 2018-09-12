@@ -5,32 +5,34 @@
     <text class="iconfont icon-loading"></text>
   </view>
 </view>
-<view wx:else class="page p-index">
+<view wx:else class="page p-index m-trip">
   <view class="m-info">
     <open-data class="avatar" type="userAvatarUrl" />
     <open-data class="name" type="userNickName" />
-    <view>
+    <view wx:if="{{!onTrip}}">
       <iconfont type="gps2" class="gpsStatus active" />
       <image src="../../res/images/setting.png" class="setting" bindtap="jumpSetting" />
       <!-- <iconfont type="setting" bindtap="jumpSetting" /> -->
     </view>
   </view>
-  <view wx:if="{{onTrip}}" class="m-trip">
-    <view class="remain">
-      <view class="tip">{{remainTip}}</view>
-      <view class="time">{{hours}}:{{minites}}:{{seconds}}</view>
-    </view>
-    <view class="control">
-      <button
-        bindtap="endTrip"
-        class="btn btn-primary"
-      >结束行程</button>
-      <button
-        bindtap="delayTrip"
-        class="btn btn-primary"
-        disabled='{{overtime}}'
-      >延迟行程</button>
-    </view>
+  <view wx:if="{{onTrip}}" class="remain">
+    <view class="time">{{hours}}:{{minites}}:{{seconds}}</view>
+    <view class="tip">{{remainTip}}</view>
+  </view>
+  <view wx:if="{{onTrip}}" class="control">
+    <button
+      bindtap="delayTrip"
+      class="btn btn-yellow"
+      disabled='{{overtime}}'
+    >延迟行程</button>
+    <button
+      bindtap="endTrip"
+      class="btn btn-primary"
+    >结束行程</button>
+    <!-- <button
+      bindtap="sendSOS"
+      class="btn btn-danger btn-small"
+    >SOS</button> -->
   </view>
   <view wx:else class="quick">
     <view class="bar">

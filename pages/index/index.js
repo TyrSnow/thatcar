@@ -6,6 +6,7 @@ import {
   verifyPwd,
   endTrip,
   delayTrip,
+  sendSOS,
 } from '../../utils/method.js';
 import {
   isPlateNo,
@@ -88,7 +89,7 @@ Page({
       minites: minites < 10 ? `0${minites}` : minites,
       hours,
       overtime: remainMinutes < 0,
-      remainTip: remainMinutes > 0 ? '剩余时间' : '行程超时',
+      remainTip: remainMinutes > 0 ? '后自动发送短信预警' : '行程超时，已发送预警短信',
     });
 
   },
@@ -206,6 +207,12 @@ Page({
     });
   },
 
+  cancelPassword() {
+    this.setData({
+      passwordVisible: false,
+    });
+  },
+
   bindGetUserInfo(e) {
     saveUserInfo(e.detail.userInfo).then(
       (resp) => {
@@ -220,6 +227,15 @@ Page({
       });
     })
   },
+
+  // sendSOS() {
+  //   sendSOS().then(resp => {
+  //     console.debug(resp);
+  //     wx.showToast({
+  //       title: resp.data.msg,
+  //     });
+  //   });
+  // },
 
   /**
    * 生命周期函数--监听页面加载

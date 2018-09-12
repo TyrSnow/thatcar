@@ -49,16 +49,18 @@
         confirm-type="done"
         bindinput="handleAddContactChange"
       />
-      <text
-        class="iconfont icon-cancel"
+      <iconfont
+        type="cancel"
+        class="iconbtn cancel"
         wx:if="{{phone.length > 0}}"
         bindtap="handlePhoneBlur"
-      ></text>
-      <text
-        class="iconfont icon-ok"
+      />
+      <iconfont
+        type="52"
+        class="iconbtn ok"
         wx:if="{{phone.length > 0}}"
         bindtap="addContact"
-      ></text>
+      />
     </view>
   </view>
   <view class="group">

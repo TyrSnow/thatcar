@@ -17,3 +17,4 @@ export const saveTripUrl = `${baseUrl}/api/user/saveTrip.htm`;
 export const getCurrentTripUrl = `${baseUrl}/api/user/getTrip.htm`;
 export const endTripUrl = `${baseUrl}/api/user/trip/updateStatus.htm`;
 export const delayTripUrl = `${baseUrl}/api/user/updateTrip.htm`;
+export const sendSOSUrl = `${baseUrl}/api/user/onekey/warn.htm`;

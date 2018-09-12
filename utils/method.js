@@ -15,6 +15,7 @@ import {
   getCurrentTripUrl,
   endTripUrl,
   delayTripUrl,
+  sendSOSUrl,
 } from './config.js';
 
 export function checkSession(callback) {
@@ -178,5 +179,12 @@ export function delayTrip(id, estimateDate) {
       id,
       estimateDate,
     },
+  });
+}
+
+export function sendSOS() {
+  return request({
+    url: sendSOSUrl,
+    method: 'post',
   });
 }
