@@ -1,9 +1,13 @@
 import { checkSession } from './utils/method.js';
+import * as store from './service/store.js';
 
 App({
   acquireAuth() {
     wx.authorize({
       scope: 'scope.userLocation',
+      success() {
+        store.set('gps', true);
+      },
       fail() {
         wx.showToast({
           icon: 'none',
@@ -20,10 +24,11 @@ App({
       success: (res) => {
         if (res.authSetting['scope.userLocation']) {
           //用户已经授权过
-          console.log("用户授权过");
+          console.log("用户授权过:", res.authSetting);
           // method.getLogin();
-
+          store.set('gps', true);
         } else {
+          store.set('gps', false);
           // method.getLogin();
           this.acquireAuth();
         }

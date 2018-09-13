@@ -10,7 +10,7 @@
     <open-data class="avatar" type="userAvatarUrl" />
     <open-data class="name" type="userNickName" />
     <view wx:if="{{!onTrip}}">
-      <iconfont type="gps2" class="gpsStatus active" />
+      <iconfont type="gps2" class="gpsStatus {{gpsStatus ? 'active' : ''}}" />
       <image src="../../res/images/setting.png" class="setting" bindtap="jumpSetting" />
       <!-- <iconfont type="setting" bindtap="jumpSetting" /> -->
     </view>

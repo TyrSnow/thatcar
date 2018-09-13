@@ -141,7 +141,7 @@ export function verifyPwd(pwd) {
   });
 }
 
-export function startTrip(estimateDate, plateNo, taxiApp) {
+export function startTrip(estimateDate, plateNo, taxiApp, gps = {}) {
   return request({
     url: saveTripUrl,
     method: 'post',
@@ -149,6 +149,7 @@ export function startTrip(estimateDate, plateNo, taxiApp) {
       estimateDate,
       plateNo,
       taxiApp,
+      gps: JSON.stringify(gps),
     },
   });
 }
@@ -160,24 +161,26 @@ export function getCurrentTrip() {
   });
 }
 
-export function endTrip(id) {
+export function endTrip(id, gps = {}) {
   return request({
     url: endTripUrl,
     method: 'post',
     data: {
       id,
       scheduleStatus: 2,
+      gps: JSON.stringify(gps),
     },
   });
 }
 
-export function delayTrip(id, estimateDate) {
+export function delayTrip(id, estimateDate, gps = {}) {
   return request({
     url: delayTripUrl,
     method: 'post',
     data: {
       id,
       estimateDate,
+      gps: JSON.stringify(gps)
     },
   });
 }

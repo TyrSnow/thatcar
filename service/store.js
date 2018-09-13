@@ -1,9 +1,13 @@
-let gpsAuthState = false;
+let cache = {};
 
-export function setGPSAuth(status) {
-  gpsAuthState = status;
+export function set(key, value) {
+  cache[key] = value;
 }
 
-export function getGPSAuth() {
-  return gpsAuthState;
+export function get(key) {
+  return cache[key];
+}
+
+export function remove(key) {
+  delete cache[key];
 }

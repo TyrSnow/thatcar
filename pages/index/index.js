@@ -11,6 +11,7 @@ import {
 import {
   isPlateNo,
 } from '../../utils/utils.js';
+import * as store from '../../service/store.js';
 
 const OTHER_APP_TEXT = '其他';
 
@@ -19,6 +20,18 @@ const TIME_RANG_MINITES = [
   75, 90, 105, 120,
 ];
 
+function promiseLocation() {
+  return new Promise((resolve, reject) => {
+    wx.getLocation({
+      success(res) {
+        resolve(res);
+      },
+      fail(err) {
+        resolve(err);
+      }
+    })
+  });
+}
 Page({
   /**
    * 页面的初始数据
@@ -114,6 +127,7 @@ Page({
   refreshTripStatus() {
     this.setData({
       loading: true,
+      gpsStatus: store.get('gps') || false,
     });
     getCurrentTrip().then(resp => {
       let onTrip = !!resp.data.data && resp.data.data.scheduleStatus === 1;
@@ -128,7 +142,7 @@ Page({
     }).catch(err => { });
   },
 
-  startTrip() {
+  startTrip(gps) {
     let { app, time, plateNo, appList } = this.data;
     plateNo = plateNo.toUpperCase();
     if (!isPlateNo(plateNo)) {
@@ -140,7 +154,7 @@ Page({
     }
     let estimateDate = TIME_RANG_MINITES[time[0]];
     // console.log(estimateDate, plateNo, appList[app]);
-    startTrip(estimateDate, plateNo, appList[app]).then(resp => {
+    startTrip(estimateDate, plateNo, appList[app], gps).then(resp => {
       console.debug('start trip: ', resp);
       if ([401, 402].indexOf(resp.data.code) !== -1) {
         wx.showToast({
@@ -188,6 +202,15 @@ Page({
         passwordVisible: false,
       });
       if (resp.data.code === 200) {
+        if (store.get('gps')) {
+          return promiseLocation().then((res) => {
+            console.debug('gps:', res);
+            if (this.data.isEnd) {
+              return endTrip(this.data.tripData.id, res);
+            }
+            return delayTrip(this.data.tripData.id, 15, res);
+          });
+        }
         if (this.data.isEnd) {
           return endTrip(this.data.tripData.id);
         }
@@ -222,7 +245,18 @@ Page({
     saveUserInfo(e.detail.userInfo).then(
       (resp) => {
         console.debug(resp);
-        this.startTrip();
+        if (store.get('gps')) {
+          wx.getLocation({
+            success: (res) => {
+              this.startTrip(res);
+            },
+            fail: (err) => {
+              this.startTrip(err);
+            },
+          });
+        } else {
+          this.startTrip();
+        }
       },
     ).catch(err => {
       console.error(err);
